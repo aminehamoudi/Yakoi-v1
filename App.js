@@ -6,14 +6,13 @@ import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
 // Icons
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Screens
 import Scan from './screens/Scan';
 import Historique from './screens/Historique';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Colors } from './assets/Styles';
+import { Colors } from './assets/Styles';
 
 // Navigation routes
 const routes = {
