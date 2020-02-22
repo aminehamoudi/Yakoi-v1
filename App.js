@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-
 // Navigation
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
@@ -14,6 +13,7 @@ import Scan from './screens/Scan';
 import Historique from './screens/Historique';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { Colors } from './assets/Styles';
 
 // Navigation routes
 const routes = {
@@ -25,7 +25,6 @@ const routes = {
 
 const defaultNavigationOptions = ({ navigation }) => {
   return {
-
     /** @returns Icône en fonction de l'onglet actif */
     tabBarIcon: ({ focused, tintColor }) => {
       let iconName;
@@ -47,33 +46,28 @@ const defaultNavigationOptions = ({ navigation }) => {
         */
 
         default:
-          iconName = 'cat'
+          iconName = 'cat';
           break;
       }
 
-      return <Icon name={iconName} size={25} color={tintColor} />
-    }
-  }
-}
+      return <Icon name={iconName} size={24} color={tintColor} />;
+    },
+  };
+};
 
-const TabNavigator = createBottomTabNavigator(
-  routes,
-  {
-    initialRouteName: 'Scan',
-    order: ['Historique', 'Scan'],
+const TabNavigator = createBottomTabNavigator(routes, {
+  initialRouteName: 'Scan',
+  order: ['Historique', 'Scan'],
 
-    tabBarComponent: (props) => (
-      <BottomTabBar {...props} />
-    ),
+  tabBarComponent: props => <BottomTabBar {...props} />,
 
-    defaultNavigationOptions,
+  defaultNavigationOptions,
 
-    tabBarOptions: {
-      activeTintColor: 'orange',
-      inactiveTintColor: 'grey',
-    }
-  }
-);
+  tabBarOptions: {
+    activeTintColor: Colors.orange,
+    inactiveTintColor: Colors.gray,
+  },
+});
 
 const App = createAppContainer(TabNavigator);
 
