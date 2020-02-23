@@ -11,9 +11,11 @@
 */
 
 import * as React from 'react';
-import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
+// Assets
 import { Typography, Colors } from '../assets/Styles';
+import { APPLE_ICON } from '../assets/images/Images';
 
 class YProduit extends React.Component {
   constructor(props) {
@@ -21,19 +23,53 @@ class YProduit extends React.Component {
 
     this.state = {
       produit: {
-        code: '154635463', // code-barres
-        image_url: 'https://i.picsum.photos/id/906/536/354.jpg', // url miniature
-        titre: 'Granola', // nom du produit
-        marque: 'LU', // marque du produit
-        calories: '75', // nombre de kcal au 100g
+        code: '123456', // code-barres
+        image_url: APPLE_ICON, // url miniature
+        titre: 'Produit anonyme', // nom du produit
+        marque: '', // marque du produit
+        calories: '0', // nombre de kcal au 100g
         nutriscore: '', // niveau de transformation
-        quantite: '50g', // taille portion ou rien en g ou mL
+        quantite: '0g', // taille portion ou rien en g ou mL
       },
     };
+
+    this.formaterProduit = this.formaterProduit.bind(this);
+  }
+
+  formaterProduit(produitJSON) {
+    let {
+      product_name: titre,
+      brands: marque,
+      image_url,
+      serving_size: quantite,
+      nutriscore_grade: nutriscore,
+    } = produitJSON;
+    const calories = produitJSON.nutriments.energy_serving;
+
+    nutriscore = nutriscore ? nutriscore.toUpperCase() : '';
+
+    console.log(nutriscore);
+
+    const produit_formate = {
+      titre: titre || this.state.titre,
+      marque: marque || this.state.marque,
+      image_url: image_url || this.state.image_url,
+      calories: calories || 0,
+      quantite: quantite || '0g',
+      nutriscore,
+    };
+
+    return produit_formate;
   }
 
   render() {
-    const produit = this.state.produit;
+    console.clear();
+    let produit = this.state.produit;
+    const produitJSON = this.props.produit;
+
+    if (produitJSON) {
+      produit = this.formaterProduit(produitJSON);
+    }
 
     return (
       <TouchableOpacity
@@ -45,7 +81,12 @@ class YProduit extends React.Component {
           }
         }}>
         {/* MINIATURE */}
-        <Image style={styles.miniature} source={{ uri: produit.image_url }} />
+        <Image
+          style={styles.miniature}
+          source={{ uri: produit.image_url }}
+          resizeMethod="resize"
+          resizeMode="contain"
+        />
 
         {/* INFORMATIONS */}
         <View style={styles.info}>
@@ -65,7 +106,11 @@ class YProduit extends React.Component {
 
         {/* NUTRISCORE */
         produit.nutriscore !== '' && (
-          <View style={styles.pastille}>
+          <View
+            style={[
+              styles.pastille,
+              { backgroundColor: Colors.nutriscore[produit.nutriscore] },
+            ]}>
             <Text style={styles.nutriscore}>{produit.nutriscore}</Text>
           </View>
         )}

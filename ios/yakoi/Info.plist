@@ -46,6 +46,11 @@
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
+
+	<!-- Permission d'utiliser la caméra -->
+	<key>NSCameraUsageDescription</key>
+	<string>Gagnez du temps avec le scan de code-barres à l'aide de votre appareil-photo !</string>
+
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

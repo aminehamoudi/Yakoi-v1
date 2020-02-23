@@ -15,6 +15,7 @@ export default class YSaisie extends Component {
           style={styles.text_input}
           placeholder={this.props.placeholder || ''}
           keyboardType={this.props.keyboardType || 'default'}
+          {...this.props}
         />
       </View>
     );
@@ -23,17 +24,17 @@ export default class YSaisie extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
     marginVertical: 4,
+    paddingHorizontal: 16,
   },
 
   text_input: {
-    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: Colors.gray,
     borderRadius: 4,
+    fontSize: 16,
     textAlign: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
   },
 });

@@ -13,29 +13,41 @@ import { FlatList } from 'react-native-gesture-handler';
 class HistoriqueScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      historique: [],
+    };
   }
 
   render() {
-    const tab = [1, 2];
+    const { historique } = this.state;
 
     return (
       <View style={styles.container}>
-        <Text style={Typography.h1}>Historique ({tab.length})</Text>
+        <Text style={Typography.h1}>Historique ({historique.length})</Text>
 
         <View style={styles.liste__container}>
-          <FlatList
-            style={styles.liste}
-            data={tab}
-            renderItem={({ item: produit }) => (
-              <YProduit
-                enAppuyant={() =>
-                  this.props.navigation.navigate('FicheProduit')
-                }
-              />
-            )}
-            keyExtractor={(_, index) => index.toString()}
-          />
+          {/* SI AUCUN PRODUIT */}
+          {!historique.length && (
+            <Text style={Typography.message}>
+              💡 Scannez des produits pour les retrouver ici !
+            </Text>
+          )}
+
+          {/* SINON */}
+          {historique.length > 0 && (
+            <FlatList
+              style={styles.liste}
+              data={historique}
+              renderItem={({ item: produit }) => (
+                <YProduit
+                  enAppuyant={() =>
+                    this.props.navigation.navigate('FicheProduit')
+                  }
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+            />
+          )}
         </View>
       </View>
     );

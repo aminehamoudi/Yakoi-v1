@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
 
 // Navigation
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
-// Icons
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 // Screens
 import Scan from './screens/Scan';
 import Historique from './screens/Historique';
 
+// Assets
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Colors } from './assets/Styles';
 
 // Navigation routes
@@ -23,9 +21,9 @@ const routes = {
 };
 
 const defaultNavigationOptions = ({ navigation }) => {
+  /** @returns Icône en fonction de l'onglet actif */
   return {
-    /** @returns Icône en fonction de l'onglet actif */
-    tabBarIcon: ({ focused, tintColor }) => {
+    tabBarIcon: ({ tintColor }) => {
       let iconName;
       const { routeName } = navigation.state;
 
@@ -69,5 +67,7 @@ const TabNavigator = createBottomTabNavigator(routes, {
 });
 
 const App = createAppContainer(TabNavigator);
+
+console.disableYellowBox = true;
 
 export default App;

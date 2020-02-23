@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Alert, StyleSheet } from 'react-native';
 
 // Composants
-// import { YIcone, YBouton, YProduit } from '../components/YComposants';
 import YProduit from '../components//YProduit';
 import YBouton from '../components/YBouton';
 import YIcone from '../components/YIcone';
@@ -35,6 +34,15 @@ class FicheProduit extends Component {
   }
 
   render() {
+    const code = this.props.navigation.getParam('code');
+    const produit = this.props.navigation.getParam('produit');
+
+    console.log('FICHE: ' + code);
+
+    if (produit) {
+      console.log('FP got produit');
+    }
+
     return (
       <View style={styles.container}>
         {/* EN TETE */}
@@ -49,7 +57,7 @@ class FicheProduit extends Component {
         </View>
 
         <View style={styles.produit__container}>
-          <YProduit />
+          <YProduit code={code} produit={produit} />
         </View>
 
         <YBouton fonction={this.alert}>+ Ajouter à ma consommation</YBouton>

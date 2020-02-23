@@ -25,23 +25,23 @@ class YBouton extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     marginVertical: 4,
+    alignItems: 'center',
   },
 
   bouton: {
-    backgroundColor: Colors.orange,
     paddingVertical: 8,
     paddingHorizontal: 32,
     borderRadius: 4,
+    backgroundColor: Colors.orange,
   },
 
   bouton__texte: {
+    color: Colors.white,
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
     textTransform: 'uppercase',
-    color: Colors.white,
   },
 });
 
